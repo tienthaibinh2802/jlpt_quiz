@@ -89,6 +89,89 @@
     {% endblock %}
   </main>
 
+  
+
+  {% if request.path == "/" %}
+  <!-- Modal Welcome -->
+  <div id="welcomeModal" style="
+      position: fixed; 
+      top: 0; left: 0; 
+      width: 100%; height: 100%; 
+      background: rgba(0,0,0,0.5); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      z-index: 9999;">
+    <div style="
+        background: white; 
+        padding: 30px; 
+        border-radius: 16px; 
+        text-align: center;
+        animation: popup 1s ease;
+        max-width: 90%;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+        
+      <!-- Icon nhấp nháy -->
+      <i class="fa-solid fa-star" style="
+          font-size: 40px; 
+          color: gold; 
+          animation: blink 1s infinite;"></i>
+  
+      <h2 style="margin: 20px 0; color: #333;">Chào mừng đến với web!</h2>
+  
+      <!-- GIF động -->
+      <img src="https://i.pinimg.com/originals/84/eb/83/84eb8323f42040a90b01772c7266717d.gif" alt="Welcome" style="
+          width: 200px; 
+          border-radius: 12px;
+          margin: 20px 0;
+          animation: float 2s infinite;">
+      
+      <p style="color: #555;">Click ra ngoài để tắt thông báo này.</p>
+  
+      <!-- Thêm một icon nữa -->
+      <i class="fa-solid fa-hand-pointer" style="
+          font-size: 30px; 
+          color: #007bff; 
+          animation: blink 1.5s infinite;"></i>
+  
+    </div>
+  </div>
+  
+  <!-- CSS Animation -->
+  <style>
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  
+    @keyframes popup {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+  
+  <!-- Script để ẩn modal khi click ra ngoài -->
+  <script>
+    document.getElementById('welcomeModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+  </script>
+  {% endif %}
+  
+
+
+
+
+
+
+
   <!-- Footer -->
   <footer>
     <div class="container">
