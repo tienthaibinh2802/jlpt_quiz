@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Trang chủ | JLPT Quiz{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Chọn cấp độ và loại bài test</h2>
+
+<!-- Tab bar -->
+<ul class="nav nav-tabs" id="jlptTab" role="tablist">
+  {% for level in levels %}
+    <li class="nav-item" role="presentation">
+      <button class="nav-link {% if forloop.first %}active{% endif %}"
+              id="tab-{{ level }}"
+              data-bs-toggle="tab"
+              data-bs-target="#content-{{ level }}"
+              type="button" role="tab">
+        {{ level }}
+      </button>
+    </li>
+  {% endfor %}
+</ul>
+
+<!-- Tab content -->
+<div class="tab-content mt-3">
+  {% for level in levels %}
+    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
+         id="content-{{ level }}" role="tabpanel">
+      <div class="row">
+        <div class="col-md-6 col-lg-4 mb-3">
+          <a href="{% url 'test_list' level=level category='kanji' %}" class="btn btn-outline-primary w-100">Test Kanji</a>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-3">
+          <a href="{% url 'test_list' level=level category='ngu_phap' %}" class="btn btn-outline-secondary w-100">Test Ngữ pháp</a>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-3">
+          <a href="{% url 'test_list' level=level category='doc_hieu' %}" class="btn btn-outline-success w-100">Test Đọc hiểu</a>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-3">
+          <a href="{% url 'test_list' level=level category='tu_vung' %}" class="btn btn-outline-warning w-100">Test Từ vựng</a>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-3">
+          <a href="{% url 'test_list' level=level category='nghe_hieu' %}" class="btn btn-outline-danger w-100">Test Nghe hiểu</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

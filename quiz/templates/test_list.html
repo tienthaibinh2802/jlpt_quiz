@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Danh sách bài test | JLPT{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">
+  Bài test {{ category|title }} - Cấp độ {{ level }}
+</h2>
+
+{% if tests %}
+  <div class="row">
+    {% for test in tests %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ test.title }}</h5>
+            <p class="card-text">Số câu hỏi: {{ test.questions.count }}</p>
+            <a href="{% url 'take_test' test.id %}" class="btn btn-primary">Bắt đầu</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-warning">
+    Không có bài test nào thuộc mục này.
+  </div>
+{% endif %}
+
+<a href="{% url 'home' %}" class="btn btn-secondary mt-4">⬅ Quay lại trang chủ</a>
+{% endblock %}

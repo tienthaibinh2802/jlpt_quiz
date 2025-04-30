@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Kết quả: {{ score }}/{{ total }}</h2>
+
+{% for item in result %}
+  <div class="mb-4 p-3 border rounded {% if item.is_correct %}bg-light{% else %}bg-danger-subtle{% endif %}">
+    <strong>Câu hỏi:</strong> {{ item.question.content }}<br>
+    
+    <strong>Đáp án của bạn:</strong> 
+    <span class="{% if item.is_correct %}text-success{% else %}text-danger{% endif %}">
+      {{ item.user_option.text }}
+    </span><br>
+
+    {% if not item.is_correct %}
+    <strong>Đáp án đúng:</strong> {{ item.correct_option.text }}<br>
+    {% endif %}
+
+    {% if item.is_correct and item.question.explanation %}
+    <div class="mt-2 p-2 bg-white border rounded">
+      <strong>Giải thích:</strong> {{ item.question.explanation }}
+    </div>
+    {% endif %}
+  </div>
+{% endfor %}
+
+<a href="{% url 'home' %}" class="btn btn-secondary mt-3">⬅ Quay lại trang chủ</a>
+{% endblock %}
