@@ -5,7 +5,7 @@
 
 {% for item in result %}
   <div class="mb-4 p-3 border rounded {% if item.is_correct %}bg-light{% else %}bg-danger-subtle{% endif %}">
-    <strong>Câu hỏi:</strong> {{ item.question.content }}<br>
+    <strong>Câu hỏi:</strong> {{ item.question.content|safe }}<br>
     
     <strong>Đáp án của bạn:</strong> 
     <span class="{% if item.is_correct %}text-success{% else %}text-danger{% endif %}">
@@ -18,7 +18,7 @@
 
     {% if item.is_correct and item.question.explanation %}
     <div class="mt-2 p-2 bg-white border rounded">
-      <strong>Giải thích:</strong> {{ item.question.explanation }}
+      <strong>Giải thích:</strong> {{ item.question.explanation|safe }}
     </div>
     {% endif %}
   </div>

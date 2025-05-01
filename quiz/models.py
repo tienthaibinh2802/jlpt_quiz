@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField # type: ignore
 
 class Test(models.Model):
     title = models.CharField(max_length=200)
@@ -18,8 +19,8 @@ class Test(models.Model):
 
 class Question(models.Model):
     test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name='questions')
-    content = models.TextField()
-    explanation = models.TextField(blank=True)
+    content = RichTextField()
+    explanation = RichTextField(blank=True)
 
     def __str__(self):
         return f"Câu hỏi: {self.content[:50]}"

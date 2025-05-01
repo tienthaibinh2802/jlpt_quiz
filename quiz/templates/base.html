@@ -77,7 +77,9 @@
   <!-- Header -->
   <header class="py-3 border-bottom">
     <div class="container d-flex justify-content-between align-items-center">
-      <div class="logo">JLPT Quiz</div>
+      <a href="{% url 'home' %}" class="text-decoration-none">
+        <div class="logo">JLPT Quiz</div>
+      </a>
       <span class="rainbow-text">Luyện thi tiếng Nhật từ N5 đến N1</span>
       <a href="{% url 'admin:index' %}" class="admin-button">🔒 Admin Login</a>
     </div>
@@ -117,7 +119,7 @@
           color: gold; 
           animation: blink 1s infinite;"></i>
   
-      <h2 style="margin: 20px 0; color: #333;">Chào mừng đến với web!</h2>
+      <h2 style="margin: 20px 0; color: #333;">Chào mừng đến với WEB luyện đề UwU!</h2>
   
       <!-- GIF động -->
       <img src="https://i.pinimg.com/originals/84/eb/83/84eb8323f42040a90b01772c7266717d.gif" alt="Welcome" style="
@@ -171,11 +173,10 @@
 
 
 
-
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p class="mb-0">© Tien Reus 2025 JLPT Test App. All rights reserved.</p>
+      <p class="mb-0">Tien Reus©2025. All rights reserved.</p>
     </div>
   </footer>
 

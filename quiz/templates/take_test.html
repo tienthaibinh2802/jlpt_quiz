@@ -6,7 +6,19 @@
 
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+
+  {% for field in form %}
+    <div class="mb-4 p-3 border rounded bg-light">
+      <div class="mb-2">
+        <strong>Câu hỏi {{ forloop.counter }}:</strong> 
+        {{ field.label|safe }}
+      </div>
+      <div>
+        {{ field }}
+      </div>
+    </div>
+  {% endfor %}
+
   <button type="submit" class="btn btn-primary">Nộp bài</button>
 </form>
 {% endblock %}
