@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Test, Question, AnswerOption
 from .forms import AnswerForm
-from django.http import HttpResponse
-from django.contrib.auth.models import User
+
 
 def home(request):
     levels = ['N5', 'N4', 'N3', 'N2', 'N1']
@@ -57,9 +56,3 @@ def take_test(request, test_id):
         'form': form,
     })
 
-def create_admin(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'admin@example.com', '12345')
-        return HttpResponse("✅ Đã tạo admin: admin / 12345")
-    else:
-        return HttpResponse("⚠️ Admin đã tồn tại rồi")
