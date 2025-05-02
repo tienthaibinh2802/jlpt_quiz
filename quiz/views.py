@@ -55,4 +55,4 @@ def take_test(request, test_id):
         'questions': questions,
         'form': form,
     })
-
+#test sql co save ko
