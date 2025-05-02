@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url # type: ignore
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,11 +77,16 @@ WSGI_APPLICATION = 'jlpt_quiz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Nếu deploy live ➔ dùng DATABASE_URL từ Render
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv(
+            'DATABASE_URL',
+            'postgresql://jlptquiz_user:aq8KtJowtXx4ndQd9W3wGDBE624kLVbL@dpg-d09g8k6uk2gs73dakk30-a.oregon-postgres.render.com/jlptquiz'
+        ),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
