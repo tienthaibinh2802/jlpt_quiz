@@ -82,7 +82,7 @@ DATABASES = {
     'default': dj_database_url.config(
         default=os.getenv(
             'DATABASE_URL',
-            'postgresql://jlptquiz_user:aq8KtJowtXx4ndQd9W3wGDBE624kLVbL@dpg-d09g8k6uk2gs73dakk30-a.oregon-postgres.render.com/jlptquiz'
+            'postgres://jlptquiz_user:aq8KtJowtXx4ndQd9W3wGDBE624kLVbL@dpg-d09g8k6uk2gs73dakk30-a.oregon-postgres.render.com/jlptquiz'
         ),
         conn_max_age=600,
         ssl_require=True
