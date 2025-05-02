@@ -10,17 +10,24 @@
     <strong>Đáp án của bạn:</strong> 
     <span class="{% if item.is_correct %}text-success{% else %}text-danger{% endif %}">
       {{ item.user_option.text }}
-    </span><br>
+    </span> 
+    <!-- ✅ Thêm dấu check hoặc dấu sai -->
+    {% if item.is_correct %}
+      ✅ Đúng
+    {% else %}
+      ❌ Sai
+    {% endif %}
+    <br>
 
     {% if not item.is_correct %}
     <strong>Đáp án đúng:</strong> {{ item.correct_option.text }}<br>
     {% endif %}
 
-    {% if item.is_correct and item.question.explanation %}
+    <!-- ✅ Luôn hiển thị giải thích -->
     <div class="mt-2 p-2 bg-white border rounded">
       <strong>Giải thích:</strong> {{ item.question.explanation|safe }}
     </div>
-    {% endif %}
+
   </div>
 {% endfor %}
 

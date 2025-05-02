@@ -37,6 +37,7 @@ def take_test(request, test_id):
                     'user_option': user_option,
                     'correct_option': correct_option,
                     'is_correct': is_correct,
+                    'explanation': question.explanation,  # luôn hiển thị giải thích
                 })
 
             return render(request, 'test_result.html', {
