@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Test, Question, AnswerOption
+from .models import Test, Question, AnswerOption, Comment
 
 
 class AnswerOptionInline(admin.TabularInline):
@@ -40,3 +40,9 @@ class QuestionAdmin(admin.ModelAdmin):
 class AnswerOptionAdmin(admin.ModelAdmin):
     list_display = ('question', 'text', 'is_correct')
     list_filter = ('is_correct',)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'message', 'created_at')  # Hiển thị các cột trong admin
+    search_fields = ('name', 'message')  # Thêm ô tìm kiếm
+    list_filter = ('created_at',)  # Bộ lọc theo ngày tháng
