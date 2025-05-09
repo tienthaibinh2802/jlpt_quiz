@@ -1,11 +1,24 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Test, Question, AnswerOption
-from .forms import AnswerForm
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Test, Question, AnswerOption, Comment
+from .forms import AnswerForm, CommentForm
 
 
 def home(request):
     levels = ['N5', 'N4', 'N3', 'N2', 'N1']
-    return render(request, 'home.html', {'levels': levels})
+    form = CommentForm()
+    comments = Comment.objects.order_by('-created_at')[:10]
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    return render(request, 'home.html', {
+        'levels': levels,
+        'form': form,
+        'comments': comments
+    })
 
 def test_list(request, level, category):
     tests = Test.objects.filter(level=level, category=category)

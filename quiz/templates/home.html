@@ -1,15 +1,16 @@
 {% extends "base.html" %}
+{% load custom_filters %}  {# Để xài add_class #}
 
 {% block title %}Trang chủ | JLPT Quiz{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Chọn cấp độ và loại bài test</h2>
+<h2 class="mb-4 text-center text-primary">🎯 Chọn cấp độ và loại bài test</h2>
 
 <!-- Tab bar -->
-<ul class="nav nav-tabs" id="jlptTab" role="tablist">
+<ul class="nav nav-pills justify-content-center mb-4" id="jlptTab" role="tablist">
   {% for level in levels %}
     <li class="nav-item" role="presentation">
-      <button class="nav-link {% if forloop.first %}active{% endif %}"
+      <button class="nav-link {% if forloop.first %}active{% endif %} mx-1"
               id="tab-{{ level }}"
               data-bs-toggle="tab"
               data-bs-target="#content-{{ level }}"
@@ -20,35 +21,60 @@
   {% endfor %}
 </ul>
 
-
-
-
 <!-- Tab content -->
-<div class="tab-content mt-3">
+<div class="tab-content">
   {% for level in levels %}
-    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
-         id="content-{{ level }}" role="tabpanel">
-      <div class="row">
-        <div class="col-md-6 col-lg-4 mb-3">
-          <a href="{% url 'test_list' level=level category='kanji' %}" class="btn btn-outline-primary w-100">Test Kanji</a>
+    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="content-{{ level }}" role="tabpanel">
+      <div class="row g-3 justify-content-center">
+        <div class="col-md-4">
+          <a href="{% url 'test_list' level=level category='kanji' %}" class="btn btn-outline-primary w-100 py-3">🈴 Test Kanji</a>
         </div>
-        <div class="col-md-6 col-lg-4 mb-3">
-          <a href="{% url 'test_list' level=level category='ngu_phap' %}" class="btn btn-outline-secondary w-100">Test Ngữ pháp</a>
+        <div class="col-md-4">
+          <a href="{% url 'test_list' level=level category='ngu_phap' %}" class="btn btn-outline-secondary w-100 py-3">📚 Test Ngữ pháp</a>
         </div>
-        <div class="col-md-6 col-lg-4 mb-3">
-          <a href="{% url 'test_list' level=level category='doc_hieu' %}" class="btn btn-outline-success w-100">Test Đọc hiểu</a>
+        <div class="col-md-4">
+          <a href="{% url 'test_list' level=level category='doc_hieu' %}" class="btn btn-outline-success w-100 py-3">📖 Test Đọc hiểu</a>
         </div>
-        <div class="col-md-6 col-lg-4 mb-3">
-          <a href="{% url 'test_list' level=level category='tu_vung' %}" class="btn btn-outline-warning w-100">Test Từ vựng</a>
+        <div class="col-md-4">
+          <a href="{% url 'test_list' level=level category='tu_vung' %}" class="btn btn-outline-warning w-100 py-3">📝 Test Từ vựng</a>
         </div>
-        <div class="col-md-6 col-lg-4 mb-3">
-          <a href="{% url 'test_list' level=level category='nghe_hieu' %}" class="btn btn-outline-danger w-100">Test Nghe hiểu</a>
+        <div class="col-md-4">
+          <a href="{% url 'test_list' level=level category='nghe_hieu' %}" class="btn btn-outline-danger w-100 py-3">🎧 Test Nghe hiểu</a>
         </div>
       </div>
     </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   {% endfor %}
 </div>
+
+<!-- Comment Form -->
+<div class="card shadow-sm p-4 my-5 bg-white rounded" style="max-width: 600px; margin: auto;">
+  <h4 class="mb-3 text-center text-primary">💬 Góp ý về trang web</h4>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.name.label_tag }}
+      {{ form.name|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+      {{ form.message.label_tag }}
+      {{ form.message|add_class:"form-control" }}
+    </div>
+    <button type="submit" class="btn btn-success w-100">Gửi góp ý</button>
+  </form>
+</div>
+
+<!-- Comment List -->
+<div class="container" style="max-width: 600px;">
+  <h5 class="mb-3 text-secondary text-center">📝 Các góp ý mới nhất:</h5>
+  <ul class="list-group">
+    {% for c in comments %}
+      <li class="list-group-item">
+        <strong class="text-primary">{{ c.name }}</strong>: {{ c.message }}
+      </li>
+    {% empty %}
+      <li class="list-group-item text-muted">Chưa có góp ý nào.</li>
+    {% endfor %}
+  </ul>
+</div>
+
 {% endblock %}

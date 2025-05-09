@@ -1,4 +1,5 @@
 from django import forms
+from .models import Comment
 
 class AnswerForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -13,3 +14,11 @@ class AnswerForm(forms.Form):
                 widget=forms.RadioSelect,
                 required=True
             )
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['name', 'email', 'message']
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 3}),
+        }
