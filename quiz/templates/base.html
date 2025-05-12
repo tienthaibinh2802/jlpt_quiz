@@ -12,6 +12,7 @@
       height: 100%;
       margin: 0;
       background-color: #fff5f7; /* 🌸 Hồng nhạt kiểu Nhật */
+      font-family: 'Poppins', sans-serif;
     }
     body {
       display: flex;
@@ -35,57 +36,59 @@
     }
 
     .admin-button {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        color: white;
-        background-color: #007bff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        text-decoration: none;
-        transition: background-color 0.3s ease;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
     }
 
     .admin-button:hover {
-        background-color: #0056b3;
+      background-color: #0056b3;
     }
 
     @keyframes colorShift {
-        0% {
-            background-position: 0% 50%;
-        }
-        100% {
-            background-position: 100% 50%;
-        }
-    }
-    
-    .rainbow-text {
-        font-size: 40px;
-        font-weight: bold;
-        background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
-        background-size: 400% 400%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: colorShift 6s linear infinite;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
-    body {
-      font-family: 'Poppins', sans-serif;
+    .rainbow-text {
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: colorShift 6s linear infinite;
     }
-    
+
+    @media (max-width: 768px) {
+      .rainbow-text {
+        font-size: 16px;
+        text-align: center;
+      }
+      .header-flex {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .logo {
+        font-size: 20px;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Header -->
   <header class="py-3 border-bottom">
-    <div class="container d-flex justify-content-between align-items-center">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap header-flex">
       <a href="{% url 'home' %}" class="text-decoration-none">
         <div class="logo">JLPT Quiz</div>
       </a>
-      <span class="rainbow-text">Luyện thi tiếng Nhật từ N5 đến N1</span>
+      <span class="rainbow-text text-center">Luyện thi tiếng Nhật từ N5 đến N1</span>
       <a href="{% url 'admin:index' %}" class="admin-button">🔒 Admin Login</a>
     </div>
   </header>
@@ -96,78 +99,35 @@
     {% endblock %}
   </main>
 
-  
-
   {% if request.path == "/" %}
   <!-- Modal Welcome -->
-  <div id="welcomeModal" style="
-      position: fixed; 
-      top: 0; left: 0; 
-      width: 100%; height: 100%; 
-      background: rgba(0,0,0,0.5); 
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      z-index: 9999;">
-    <div style="
-        background: white; 
-        padding: 30px; 
-        border-radius: 16px; 
-        text-align: center;
-        animation: popup 1s ease;
-        max-width: 90%;
-        box-shadow: 0 0 20px rgba(0,0,0,0.2);">
-        
-      <!-- Icon nhấp nháy -->
-      <i class="fa-solid fa-star" style="
-          font-size: 40px; 
-          color: gold; 
-          animation: blink 1s infinite;"></i>
-  
-          <h2 style="margin: 20px 0; color: #333; font-family: 'Poppins', sans-serif;">
-            Chào mừng đến với WEB luyện đề UwU!
-          </h2>
-          
-  
-      <!-- GIF động -->
-      <img src="https://i.pinimg.com/originals/84/eb/83/84eb8323f42040a90b01772c7266717d.gif" alt="Welcome" style="
-          width: 200px; 
-          border-radius: 12px;
-          margin: 20px 0;
-          animation: float 2s infinite;">
-      
-      <p style="color: #555;">Lưu ý : Bôi đen để dịch</p>
-      <p style="color: #555;">*(Hiện tại mới chỉ tạo bài test ở kanji N3)</p>
-      <p style="color: #555;"> Click ra ngoài để tắt thông báo này.</p>
-  
-      <!-- Thêm một icon nữa -->
-      <i class="fa-solid fa-hand-pointer" style="
-          font-size: 30px; 
-          color: #007bff; 
-          animation: blink 1.5s infinite;"></i>
-  
+  <div id="welcomeModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+    <div style="background: white; padding: 20px; border-radius: 16px; text-align: center; animation: popup 1s ease; max-width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+      <i class="fa-solid fa-star" style="font-size: 30px; color: gold; animation: blink 1s infinite;"></i>
+      <h2 style="margin: 20px 0; color: #333; font-size: 20px;">Chào mừng đến với WEB luyện đề UwU!</h2>
+      <img src="https://i.pinimg.com/originals/84/eb/83/84eb8323f42040a90b01772c7266717d.gif" alt="Welcome" style="width: 150px; border-radius: 12px; margin: 20px 0; animation: float 2s infinite;">
+      <p style="color: #555; font-size: 14px;">Lưu ý : Bôi đen để dịch</p>
+      <p style="color: #555; font-size: 14px;">*(Hiện tại mới chỉ tạo bài test ở kanji N3)</p>
+      <p style="color: #555; font-size: 14px;">Click ra ngoài để tắt thông báo này.</p>
+      <i class="fa-solid fa-hand-pointer" style="font-size: 24px; color: #007bff; animation: blink 1.5s infinite;"></i>
     </div>
   </div>
-  
-  <!-- CSS Animation -->
+
   <style>
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
     }
-  
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-  
     @keyframes popup {
       0% { transform: scale(0.5); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
   </style>
-  
-  <!-- Script để ẩn modal khi click ra ngoài -->
+
   <script>
     document.getElementById('welcomeModal').addEventListener('click', function(e) {
       if (e.target === this) {
@@ -176,7 +136,6 @@
     });
   </script>
   {% endif %}
-  
 
   <!-- Footer -->
   <footer>
@@ -185,10 +144,8 @@
     </div>
   </footer>
 
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   {% block scripts %}{% endblock %}
-
 
   <!-- Translate -->
   <style>
@@ -203,20 +160,19 @@
       display: none;
       max-width: 300px;
     }
-    </style>
-    
-    <div id="translate-popup"></div>
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+  </style>
+
+  <div id="translate-popup"></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
     $(document).ready(function() {
       let popup = $('#translate-popup');
-    
+
       $(document).on('mouseup', function(e) {
         let selectedText = window.getSelection().toString().trim();
-    
-        if (selectedText.length > 1) { // Chỉ khi bôi đen thực sự
-          // Gọi API Google Dịch
+
+        if (selectedText.length > 1) {
           $.get('https://translate.googleapis.com/translate_a/single', {
             client: 'gtx',
             sl: 'ja',
@@ -225,27 +181,16 @@
             q: selectedText
           }, function(data) {
             let translated = data[0][0][0];
-    
-            // Hiển thị popup ngay tại vị trí chuột
             popup.text("🇯🇵 ➔ 🇻🇳: " + translated)
-                 .css({
-                   top: e.pageY + 10 + 'px',
-                   left: e.pageX + 10 + 'px'
-                 })
+                 .css({ top: e.pageY + 10 + 'px', left: e.pageX + 10 + 'px' })
                  .fadeIn();
           });
         } else {
-          popup.fadeOut(); // Nếu không bôi đen thì ẩn popup
+          popup.fadeOut();
         }
       });
     });
-    </script>
-    
-
-
-
-
-
+  </script>
 
 </body>
 </html>
