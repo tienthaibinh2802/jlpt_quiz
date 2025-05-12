@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quiz',
     'ckeditor',
+    'import_export',
 ]
 
 MIDDLEWARE = [

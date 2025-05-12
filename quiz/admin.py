@@ -1,10 +1,11 @@
 from django.contrib import admin
 from .models import Test, Question, AnswerOption, Comment
-
+from import_export.admin import ImportExportModelAdmin # type: ignore
+from .resources import QuestionResource  # ✅ Dùng Resource chuẩn từ resources.py
 
 class AnswerOptionInline(admin.TabularInline):
     model = AnswerOption
-    extra = 4  # Luôn hiển thị sẵn 4 dòng để nhập (A, B, C, D)
+    extra = 4
 
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
@@ -16,13 +17,12 @@ class TestAdmin(admin.ModelAdmin):
         return obj.questions.count()
 
 @admin.register(Question)
-class QuestionAdmin(admin.ModelAdmin):
+class QuestionAdmin(ImportExportModelAdmin):  # ✅ Dùng import-export
+    resource_class = QuestionResource  # ✅ Kết nối resource
     list_display = ('short_content', 'test', 'get_level', 'get_category')
     search_fields = ('content',)
-    # ✅ Thêm lọc theo Test nữa
     list_filter = ('test', 'test__level', 'test__category')
-    list_per_page = 30  # 30 câu hỏi 1 trang
-
+    list_per_page = 30
     inlines = [AnswerOptionInline]
 
     def short_content(self, obj):
@@ -43,6 +43,7 @@ class AnswerOptionAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'message', 'created_at')  # Hiển thị các cột trong admin
-    search_fields = ('name', 'message')  # Thêm ô tìm kiếm
-    list_filter = ('created_at',)  # Bộ lọc theo ngày tháng
+    list_display = ('name', 'message', 'created_at')
+    search_fields = ('name', 'message')
+    list_filter = ('created_at',)
+8
