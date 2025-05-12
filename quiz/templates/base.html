@@ -28,7 +28,7 @@
     }
     .logo {
       font-weight: bold;
-      font-size: 24px;
+      font-size: 30px;
       color: #d63384;
     }
     header {
@@ -83,15 +83,118 @@
 <body>
 
   <!-- Header -->
-  <header class="py-3 border-bottom">
-    <div class="container d-flex justify-content-between align-items-center flex-wrap header-flex">
-      <a href="{% url 'home' %}" class="text-decoration-none">
-        <div class="logo">JLPT Quiz</div>
+  <header class="py-3 border-bottom custom-header">
+    <div class="container header-container">
+      <a href="{% url 'home' %}" class="text-decoration-none logo-link">
+        <img src="https://i.pinimg.com/736x/79/49/9d/79499dbce1a9e7823a8840740c08f14f.jpg" alt="JLPT Quiz" class="logo-img">
       </a>
-      <span class="rainbow-text text-center">Luyện thi tiếng Nhật từ N5 đến N1</span>
-      <a href="{% url 'admin:index' %}" class="admin-button">🔒 Admin Login</a>
+      <span class="rainbow-text-animated text-center">Luyện thi tiếng Nhật từ N5 đến N1</span>
+      <a href="{% url 'admin:index' %}" class="admin-button-animated">🔒 Admin Login</a>
     </div>
   </header>
+  
+  <style>
+    .custom-header {
+      background: linear-gradient(90deg, #fff0f3, #ffe6f0, #fff0f3);
+      background-size: 200% 200%;
+      animation: bgShift 8s ease infinite;
+    }
+    
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .header-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo-img {
+      width: 60px;
+      height: auto;
+      border-radius: 50%;
+      animation: rotateLogo 10s linear infinite, glow 3s ease-in-out infinite;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo-img:hover {
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    @keyframes rotateLogo {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px rgba(214, 51, 132, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(214, 51, 132, 1); }
+      100% { box-shadow: 0 0 5px rgba(214, 51, 132, 0.5); }
+    }
+    
+    .rainbow-text-animated {
+      font-size: 30px;
+      font-weight: bold;
+      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: colorShift 6s linear infinite, fadeIn 2s ease forwards;
+      opacity: 0;
+      margin: 10px 0;
+    }
+    
+    @keyframes colorShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    .admin-button-animated {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 15px;
+      color: white;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    
+    .admin-button-animated:hover {
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+      transform: scale(1.05);
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .rainbow-text-animated {
+        font-size: 16px;
+      }
+      .admin-button-animated {
+        margin-top: 10px;
+      }
+    }
+  </style>
+  
 
   <!-- Main content block -->
   <main class="content container py-4">
