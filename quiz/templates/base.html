@@ -11,9 +11,19 @@
     html, body {
       height: 100%;
       margin: 0;
-      background-color: #fff5f7; /* 🌸 Hồng nhạt kiểu Nhật */
+      /*background-color: #e6fff7;  🌸 Hồng nhạt kiểu Nhật */
       font-family: 'Poppins', sans-serif;
+      background: linear-gradient(270deg, #ffeef5, #e0f7fa, #f3e8ff);
+      background-size: 600% 600%;
+      animation: animatedBG 15s ease infinite;
     }
+
+    @keyframes animatedBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
     body {
       display: flex;
       flex-direction: column;
@@ -32,7 +42,7 @@
       color: #d63384;
     }
     header {
-      background-color: #fff0f3;
+      background-color: #f3e8ff;
     }
 
     .admin-button {
@@ -95,7 +105,7 @@
   
   <style>
     .custom-header {
-      background: linear-gradient(90deg, #fff0f3, #ffe6f0, #fff0f3);
+      /*background: linear-gradient(90deg, #fff0f3, #ffe6f0, #fff0f3);*/
       background-size: 200% 200%;
       animation: bgShift 8s ease infinite;
     }
@@ -207,11 +217,12 @@
   <div id="welcomeModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999;">
     <div style="background: white; padding: 20px; border-radius: 16px; text-align: center; animation: popup 1s ease; max-width: 90%; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
       <i class="fa-solid fa-star" style="font-size: 30px; color: gold; animation: blink 1s infinite;"></i>
-      <h2 style="margin: 20px 0; color: #333; font-size: 20px;">Chào mừng đến với WEB luyện đề UwU!</h2>
+      <h2 style="margin: 20px 0; color: #333; font-size: 25px;">Chào mừng đến với WEB luyện đề UwU!</h2>
       <img src="https://i.pinimg.com/originals/84/eb/83/84eb8323f42040a90b01772c7266717d.gif" alt="Welcome" style="width: 150px; border-radius: 12px; margin: 20px 0; animation: float 2s infinite;">
-      <p style="color: #555; font-size: 14px;">Lưu ý : Bôi đen để dịch</p>
-      <p style="color: #555; font-size: 14px;">*(Hiện tại mới chỉ tạo bài test ở kanji N3)</p>
-      <p style="color: #555; font-size: 14px;">Click ra ngoài để tắt thông báo này.</p>
+      <p style="color: #555; font-size: 18px;">Lưu ý : Bôi đen để dịch</p>
+      <p style="color: #ff9900; font-size: 18px;">*(Hiện tại mới chỉ tạo bài test ở kanji N3)</p>
+      <p style="color: #00ff00; font-size: 18px;">Mọi người trải nghiệm cho tớ xin góp ý để hoàn thiện Web hơn nha !</p>
+      <p style="color: #ff0000; font-size: 18px;">Click ra ngoài để tắt thông báo này.</p>
       <i class="fa-solid fa-hand-pointer" style="font-size: 24px; color: #007bff; animation: blink 1.5s infinite;"></i>
     </div>
   </div>
